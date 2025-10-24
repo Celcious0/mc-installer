@@ -37,14 +37,10 @@ jobs:
       - name: Build (console)
         run: pyinstaller --onefile -n mc_installer mc_installer.py
 
-      - name: Build (silent)
-        run: pyinstaller --onefile --noconsole -n mc_installer_silent mc_installer.py
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: mc_installer_windows
           path: |
             dist/mc_installer.exe
-            dist/mc_installer_silent.exe
           if-no-files-found: error
