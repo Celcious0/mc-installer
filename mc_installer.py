@@ -23,7 +23,7 @@ except Exception:
 
 # ==== 사용자 지정 영역 =========================================================
 FORGE_INSTALLER_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.4.10/forge-1.20.1-47.4.10-installer.jar"
-MODS_ZIP_URL_ORIG   = "https://www.dropbox.com/scl/fi/4ds1rqjctlmsese88dgl4/mods.zip?dl=0&e=1&rlkey=mtuu6b4x2jeileel1ojhwi9rz&st=na185aag"
+MODS_ZIP_URL_ORIG   = "https://www.dropbox.com/scl/fi/8j78vjexxj5smh69jeakd/mods.zip?rlkey=3z55ghjtgq6yom8nhfg1tht2t&st=xa3vx6cf&dl=1"
 
 # Forge가 정상 설치되었는지 판단할 때 확인할 버전 디렉터리 이름
 FORGE_VERSION_DIRNAME = "1.20.1-forge-47.4.10"
