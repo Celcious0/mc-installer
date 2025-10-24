@@ -1,0 +1,50 @@
+name: build-windows-exe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - mc_installer.py
+      - requirements.txt
+      - .github/workflows/build-windows.yml
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          architecture: 'x64'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build (console)
+        run: pyinstaller --onefile -n mc_installer mc_installer.py
+
+      - name: Build (silent)
+        run: pyinstaller --onefile --noconsole -n mc_installer_silent mc_installer.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mc_installer_windows
+          path: |
+            dist/mc_installer.exe
+            dist/mc_installer_silent.exe
+          if-no-files-found: error
